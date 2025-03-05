@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./router/prorouter'); // Import auth routes
 const cors=require('cors')
 const app = express();
-
+const eventrouter=require('./router/eventrouter')
 require('dotenv').config()
 // Middleware
 app.use(express.json());      // Body parser middleware
@@ -17,7 +17,7 @@ app.use(cors({
 }));
 // Routes
 app.use('/api/auth', authRoutes);
-
+app.use('/api/event',eventrouter)
 
 
 mongoose.connect(process.env.MongoDBUrL, {
