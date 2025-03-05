@@ -1,4 +1,4 @@
-const Event = require('../models/event');  // Import the Event model
+const Event = require('../model/Event');  
 
 
 module.exports.createEvent = async (req, res) => {
@@ -77,9 +77,9 @@ module.exports.searchEvents = async (req, res) => {
   try {
     const { title, location, Category, orgnaizer, Startdate, Enddate } = req.query;
 
-    // Build the search query dynamically based on provided criteria
+   
     const query = {};
-    if (title) query.title = { $regex: title, $options: 'i' }; // Case-insensitive search
+    if (title) query.title = { $regex: title, $options: 'i' }; 
     if (location) query.location = { $regex: location, $options: 'i' };
     if (Category) query.Category = Category;
     if (orgnaizer) query.orgnaizer = orgnaizer;
