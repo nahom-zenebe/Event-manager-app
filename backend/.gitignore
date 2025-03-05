@@ -1,0 +1,35 @@
+# Node.js dependencies
+/node_modules/
+
+# Build output
+/dist/
+/build/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*  # If you have multiple environment files (like .env.development, .env.production)
+
+# Dependency directories
+bower_components/
+
+# Operating System files
+.DS_Store      # macOS
+Thumbs.db      # Windows
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp          # vim
+*.sublime-project
+*.sublime-workspace
+
+# Miscellaneous
+*.tgz           # tarballs for versioning
+.env
