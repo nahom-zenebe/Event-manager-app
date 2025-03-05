@@ -2,22 +2,96 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/eventmodel.dart';
 
-class Eventdatasource {
-  final BaseApi = "http://localhost:5000/api/event";
+class EventDataSource {
+  final String baseApi = "http://localhost:5000/api/event";
 
-  Future<EventModel> createEvent(String title, String location, String Category,
-      String image, String orgnaizer, String Startdate, String Enddate) async {
-    final response = await http.post(Uri.parse("$BaseApi/createevent"),
-    body: jsonEncode(
-          {'title': title, 'location': location, 'Category': Category, 'image':image,'orgnaizer':orgnaizer,'Startdate':Startdate,'Enddate':Enddate}),
+  Future<EventModel> createEvent(String title, String location, String category,
+      String image, String organizer, String startDate, String endDate) async {
+    final response = await http.post(
+      Uri.parse("$baseApi/createevent"),
+      body: jsonEncode({
+        'title': title,
+        'location': location,
+        'category': category,
+        'image': image,
+        'organizer': organizer,
+        'startDate': startDate,
+        'endDate': endDate
+      }),
       headers: {'Content-Type': 'application/json'},
     );
 
     if (response.statusCode == 201) {
       return EventModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Event creation failed");
     }
-    else {
-      throw Exception("signup Failed");
+  }
+
+  Future<void> deleteEvent(String id) async {
+    final response = await http.delete(
+      Uri.parse("$baseApi/deleteevent/$id"),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 204) {
+      print("Event deleted successfully");
+    } else {
+      throw Exception("Event deletion failed");
+    }
+  }
+
+  Future<EventModel> updateEvent(String id, String title, String location, String category,
+      String image, String organizer, String startDate, String endDate) async {
+    final response = await http.put(
+      Uri.parse("$baseApi/updateevent/$id"),
+      body: jsonEncode({
+        'title': title,
+        'location': location,
+        'category': category,
+        'image': image,
+        'organizer': organizer,
+        'startDate': startDate,
+        'endDate': endDate
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return EventModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Event update failed");
+    }
+  }
+
+  Future<List<EventModel>> getAllEvents() async {
+    final response = await http.get(Uri.parse("$baseApi/getallevents"));
+
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = jsonDecode(response.body);
+      return jsonList.map((json) => EventModel.fromJson(json)).toList();
+    } else {
+      throw Exception("Failed to fetch events");
+    }
+  }
+
+  Future<List<EventModel>> searchEvent({
+    String? title,
+    String? location,
+    String? category,
+    String? organizer,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        "$baseApi/searchevent?title=${title ?? ''}&location=${location ?? ''}&category=${category ?? ''}&organizer=${organizer ?? ''}",
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = jsonDecode(response.body);
+      return jsonList.map((json) => EventModel.fromJson(json)).toList();
+    } else {
+      throw Exception("Event search failed");
     }
   }
 }
