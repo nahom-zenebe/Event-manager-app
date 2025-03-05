@@ -7,6 +7,7 @@ const cors=require('cors')
 const app = express();
 const eventrouter=require('./router/eventrouter')
 const categoryrouter=require('./router/eventrouter')
+const rsvprouter=require("./router/rsvprouter")
 require('dotenv').config()
 
 app.use(express.json());    
@@ -20,6 +21,7 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/event',eventrouter)
 app.use('/api/category', categoryrouter)
+app.use('/api/rsvp',rsvprouter)
 
 mongoose.connect(process.env.MongoDBUrL, {
 
