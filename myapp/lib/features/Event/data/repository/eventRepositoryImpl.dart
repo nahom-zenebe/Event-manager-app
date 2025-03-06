@@ -13,9 +13,9 @@ class EventRepositoryImpl implements Eventrepository {
     return eventDataSource.createEvent(
       event.title,
       event.location,
-      event.Category, // Ensure this matches EventModel
+      event.Category,
       event.image,
-      event.orgnaizer, // Check for correct spelling
+      event.orgnaizer, 
       event.Startdate,
       event.Enddate,
     );
