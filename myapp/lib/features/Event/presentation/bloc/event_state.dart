@@ -1,19 +1,38 @@
 import '../../domain/entities/event.dart';
 
-
-
 abstract class EventState {}
 
-class EventInitial extends EventState  {}
+class EventInitial extends EventState {}
 
-class EventLoading extends EventState  {}
+class EventLoading extends EventState {}
 
-class EventSucess extends EventState  {
+class EventSuccess extends EventState { // Fixed spelling from EventSucess
   final Event event;
-  EventSucess(this.event);
+  EventSuccess(this.event);
 }
 
-class EventFailure extends EventState  {
+class EventFailure extends EventState { // Changed name for consistency
   final String message;
   EventFailure(this.message);
+}
+
+// Additional states to match the Bloc logic
+class EventCreated extends EventState {
+  final Event event;
+  EventCreated(this.event);
+}
+
+class EventDeleted extends EventState {
+  final String id;
+  EventDeleted(this.id);
+}
+
+class EventUpdated extends EventState {
+  final Event event;
+  EventUpdated(this.event);
+}
+
+class EventLoaded extends EventState {
+  final List<Event> events;
+  EventLoaded({required this.events});
 }

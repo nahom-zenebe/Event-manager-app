@@ -11,14 +11,16 @@ class EventRepositoryImpl implements Eventrepository {
   @override
   Future<Event> createEvent(Event event) async {
     return eventDataSource.createEvent(
-      event.title,
-      event.location,
-      event.Category,
-      event.image,
-      event.orgnaizer, 
-      event.Startdate,
-      event.Enddate,
-    );
+  event.title,
+  event.location,
+  event.category,
+  event.image,
+  event.organizer, 
+  event.startDate,
+  event.endDate,
+);
+
+
   }
 
   @override
@@ -37,11 +39,11 @@ class EventRepositoryImpl implements Eventrepository {
       id,
       event.title,
       event.location,
-      event.Category,
+       event.category,
       event.image,
-      event.orgnaizer,
-      event.Startdate,
-      event.Enddate,
+      event.organizer, 
+      event.startDate,
+      event.endDate,
     );
   }
 

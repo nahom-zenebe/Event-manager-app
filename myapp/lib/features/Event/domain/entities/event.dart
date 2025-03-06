@@ -1,18 +1,19 @@
 class Event {
   final String title;
   final String location;
-  final String Category;
+  final String category; 
   final String image;
-  final String orgnaizer;
-  final String Startdate;
-  final String Enddate;
+  final String organizer;
+  final String startDate; 
+  final String endDate; 
+
   Event({
     required this.title,
     required this.location,
-    required this.Category,
+    required this.category,
     required this.image,
-    required this.orgnaizer,
-    required this.Startdate,
-    required this.Enddate,
+    required this.organizer,
+    required this.startDate,
+    required this.endDate,
   });
 }

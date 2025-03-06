@@ -12,11 +12,11 @@ class EventModel extends Event {
   }) : super(
           title: title,
           location: location,
-          Category: category,
+          category: category,
           image: image,
-          orgnaizer: organizer,
-          Startdate: startDate,
-          Enddate: endDate,
+          organizer: organizer,
+          startDate: startDate,
+          endDate: endDate,
         );
 
   factory EventModel.fromJson(Map<String, dynamic> json) {

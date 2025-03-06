@@ -3,10 +3,9 @@ import '../entities/event.dart';
 
 class Getalleventsusecase {
   final Eventrepository eventrepository;
-
   Getalleventsusecase(this.eventrepository);
 
-  Future<List<Event>> getallEvents() {
-    return eventrepository.getallEvents();
+  Future<void> deleteEvent(String id) {
+    return eventrepository.deleteEvent(id);
   }
 }
