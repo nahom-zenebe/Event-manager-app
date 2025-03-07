@@ -8,7 +8,6 @@ import 'package:myapp/features/Event/domain/usecase/getallEventsusecase.dart';
 import 'package:myapp/features/Event/domain/usecase/searchEventusecase.dart';
 import 'package:myapp/features/Event/domain/usecase/updateEventusecase.dart';
 import 'package:myapp/features/Event/presentation/bloc/event_bloc.dart';
-import 'package:myapp/features/Event/presentation/bloc/event_event.dart';
 import 'package:myapp/features/auth/data/datasource/user_datasource.dart';
 import 'package:myapp/features/auth/data/repositories/User_Authrepositoryimpl.dart.dart';
 import 'package:myapp/features/auth/domain/usecases/login_usecase.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers:[
           BlocProvider(create: (context)=>AuthBloc(loginUsecase: LoginUsecase(UserAuthrepositoryimpl(UserDatasource())), signupUsecase: SignupUsecase(UserAuthrepositoryimpl(UserDatasource())))),
-          BlocProvider(create: (context)=>EventBloc(createEvent:Createeventusecase(EventRepositoryImpl(EventDataSource())), deleteEvent: Deleteeventusecase((EventRepositoryImpl(EventDataSource()))), updateevent: Updateeventusecase((EventRepositoryImpl(EventDataSource()))), searchevent: Searcheventusecase((EventRepositoryImpl(EventDataSource()))), getallevents:Getalleventsusecase((EventRepositoryImpl(EventDataSource())))))
+          BlocProvider(create: (context)=>EventBloc(createEvent:Createeventusecase(EventRepositoryImpl(EventDataSource())), deleteEvent: Deleteeventusecase((EventRepositoryImpl(EventDataSource()))), updateEvent: Updateeventusecase((EventRepositoryImpl(EventDataSource()))), searchEvent: Searcheventusecase((EventRepositoryImpl(EventDataSource()))), getAllEvents:Getalleventsusecase((EventRepositoryImpl(EventDataSource())))))
         
       ] ,
         child:

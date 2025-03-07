@@ -36,10 +36,12 @@ class DeleteEvent extends EventEvent {
   List<Object?> get props => [id];
 }
 
-// 📌 Get All Events
-class GetAllEvents extends EventEvent {}
 
-// 📌 Update Event
+class GetAllEvents extends EventEvent {
+
+}
+
+
 class UpdateEvent extends EventEvent {
   final String id;
   final String title;

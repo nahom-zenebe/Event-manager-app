@@ -5,7 +5,7 @@ class Getalleventsusecase {
   final Eventrepository eventrepository;
   Getalleventsusecase(this.eventrepository);
 
-  Future<void> deleteEvent(String id) {
-    return eventrepository.deleteEvent(id);
+  Future<List<Event>>getallEvent(String someParameter) {
+    return eventrepository.getallEvents();
   }
 }

@@ -1,8 +1,6 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../domain/usecase/ createEventusecase.dart'; // Ensure correct import path
+import '../../domain/usecase/ createEventusecase.dart';
 import '../../domain/usecase/deleteEventusecase.dart';
 import '../../domain/usecase/getallEventsusecase.dart';
 import '../../domain/usecase/updateEventusecase.dart';
@@ -33,7 +31,8 @@ class EventBloc extends Bloc<EventEvent, EventState> {
   }
 
   // 📌 Handle Create Event
-  Future<void> _onCreateEvent(CreateEvent event, Emitter<EventState> emit) async {
+  Future<void> _onCreateEvent(
+      CreateEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
       final newEvent = await createEvent.createEvent(Event(
@@ -52,7 +51,8 @@ class EventBloc extends Bloc<EventEvent, EventState> {
   }
 
   // 📌 Handle Delete Event
-  Future<void> _onDeleteEvent(DeleteEvent event, Emitter<EventState> emit) async {
+  Future<void> _onDeleteEvent(
+      DeleteEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
       await deleteEvent.deleteEvent(event.id);
@@ -63,7 +63,8 @@ class EventBloc extends Bloc<EventEvent, EventState> {
   }
 
   // 📌 Handle Update Event
-  Future<void> _onUpdateEvent(UpdateEvent event, Emitter<EventState> emit) async {
+  Future<void> _onUpdateEvent(
+      UpdateEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
       final updatedEvent = await updateEvent.updateEvent(
@@ -84,19 +85,20 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     }
   }
 
-  // 📌 Handle Get All Events
-  Future<void> _onGetAllEvents(GetAllEvents event, Emitter<EventState> emit) async {
+  Future<void> _onGetAllEvents(
+      GetAllEvents event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
-      final events = await getAllEvents();
+      final events = await getAllEvents.getallEvent("someArgument");
+
       emit(EventLoaded(events: events));
     } catch (error) {
       emit(EventFailure(error.toString()));
     }
   }
 
-  // 📌 Handle Search Event
-  Future<void> _onSearchEvent(SearchEvent event, Emitter<EventState> emit) async {
+  Future<void> _onSearchEvent(
+      SearchEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
       final events = await searchEvent.searchEvent(
