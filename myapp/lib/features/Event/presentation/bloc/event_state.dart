@@ -6,12 +6,14 @@ class EventInitial extends EventState {}
 
 class EventLoading extends EventState {}
 
-class EventSuccess extends EventState { // Fixed spelling from EventSucess
+class EventSuccess extends EventState {
+  // Fixed spelling from EventSucess
   final Event event;
   EventSuccess(this.event);
 }
 
-class EventFailure extends EventState { // Changed name for consistency
+class EventFailure extends EventState {
+  // Changed name for consistency
   final String message;
   EventFailure(this.message);
 }
@@ -35,4 +37,12 @@ class EventUpdated extends EventState {
 class EventLoaded extends EventState {
   final List<Event> events;
   EventLoaded({required this.events});
+}
+
+class CartUpdated extends EventState {
+  final List<Event> cart;
+  CartUpdated(this.cart);
+
+  @override
+  List<Object> get props => [cart];
 }

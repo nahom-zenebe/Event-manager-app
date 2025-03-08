@@ -11,6 +11,7 @@ class EventRepositoryImpl implements Eventrepository {
   @override
   Future<Event> createEvent(Event event) async {
     return eventDataSource.createEvent(
+            
   event.title,
   event.location,
   event.category,
@@ -49,6 +50,7 @@ class EventRepositoryImpl implements Eventrepository {
 
   @override
   Future<List<Event>> searchEvent({
+    
     String? title,
     String? location,
     String? category,

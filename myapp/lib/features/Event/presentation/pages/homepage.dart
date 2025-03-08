@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myapp/features/Event/domain/entities/event.dart';
 import '../bloc/event_bloc.dart';
 import '../bloc/event_state.dart';
 import '../../../../core/widgets/Events.dart';
@@ -21,7 +22,6 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: BlocConsumer<EventBloc, EventState>(
         listener: (context, state) {
           if (state is EventFailure) {
@@ -40,14 +40,25 @@ class _HomepageState extends State<Homepage> {
               itemBuilder: (context, index) {
                 final event = events[index];
                 return EventCard(
-                  title: event.title,
-                  location: event.location,
-                  category: event.category,
-                  image: event.image,
-                  organizer: event.organizer,
-                  startDate: event.startDate,
-                  endDate: event.endDate,
-                );
+                    title: event.title,
+                    location: event.location,
+                    category: event.category,
+                    image: event.image,
+                    organizer: event.organizer,
+                    startDate: event.startDate,
+                    endDate: event.endDate,
+                    addtocart: () {
+                      context.read<EventBloc>().add(Addtocart(
+                          event: Event(
+                              id: event.id,
+                              title: event.title,
+                              location: event.location,
+                              category: event.category,
+                              image: event.image,
+                              organizer: event.organizer,
+                              startDate: event.startDate,
+                              endDate: event.endDate)));
+                    });
               },
             );
           } else if (state is EventFailure) {

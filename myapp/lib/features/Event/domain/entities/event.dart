@@ -1,13 +1,15 @@
 class Event {
+  final String ? id;
   final String title;
   final String location;
-  final String category; 
+  final String category;
   final String image;
   final String organizer;
-  final DateTime startDate; 
-  final DateTime endDate; 
+  final DateTime startDate;
+  final DateTime endDate;
 
   Event({
+   this.id,
     required this.title,
     required this.location,
     required this.category,

@@ -1,3 +1,4 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../domain/usecase/ createEventusecase.dart';
@@ -10,6 +11,7 @@ import './event_state.dart';
 part 'event_event.dart';
 
 class EventBloc extends Bloc<EventEvent, EventState> {
+  final List<Event> cart = [];
   final Createeventusecase createEvent;
   final Deleteeventusecase deleteEvent;
   final Updateeventusecase updateEvent;
@@ -24,19 +26,17 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     required this.getAllEvents,
   }) : super(EventInitial()) {
     on<CreateEvent>(_onCreateEvent);
+    on<Addtocart>(_onAddToCart);
+    on<Removefromcart>(_onRemoveFromCart);
     on<DeleteEvent>(_onDeleteEvent);
     on<UpdateEvent>(_onUpdateEvent);
     on<GetAllEvents>(_onGetAllEvents);
     on<SearchEvent>(_onSearchEvent);
   }
 
-  // 📌 Handle Create Event
-  Future<void> _onCreateEvent(
-      CreateEvent event, Emitter<EventState> emit) async {
+ Future<void> _onCreateEvent(CreateEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
-  
-
       final newEvent = await createEvent.createEvent(Event(
         title: event.title,
         location: event.location,
@@ -52,7 +52,6 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     }
   }
 
-  // 📌 Handle Delete Event
   Future<void> _onDeleteEvent(
       DeleteEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
@@ -64,7 +63,6 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     }
   }
 
-  
   Future<void> _onUpdateEvent(
       UpdateEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
@@ -72,6 +70,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
       final updatedEvent = await updateEvent.updateEvent(
         event.id,
         Event(
+          id:event.id,
           title: event.title,
           location: event.location,
           category: event.category,
@@ -114,4 +113,21 @@ class EventBloc extends Bloc<EventEvent, EventState> {
       emit(EventFailure(error.toString()));
     }
   }
+
+  Future<void> _onAddToCart(
+      Addtocart event, Emitter<EventState> emit) async {
+    final updatedCart = List<Event>.from(cart)..add(event.event);
+    cart.clear();
+    cart.addAll(updatedCart);
+    emit(CartUpdated(updatedCart));
+  }
+
+  Future<void> _onRemoveFromCart(
+      Removefromcart event, Emitter<EventState> emit) async {
+    final updatedCart = List<Event>.from(cart)..removeWhere((e) => e.id == event.Eventid);
+    cart.clear();
+    cart.addAll(updatedCart);
+    emit(CartUpdated(updatedCart));
+  }
+
 }

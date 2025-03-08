@@ -8,16 +8,17 @@ class EventCard extends StatelessWidget {
   final String organizer;
   final DateTime startDate;
   final DateTime endDate;
+  final VoidCallback addtocart;
 
-  const EventCard({
-    required this.title,
-    required this.location,
-    required this.category,
-    required this.image,
-    required this.organizer,
-    required this.startDate,
-    required this.endDate,
-  });
+  const EventCard(
+      {required this.title,
+      required this.location,
+      required this.category,
+      required this.image,
+      required this.organizer,
+      required this.startDate,
+      required this.endDate,
+      required this.addtocart});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +34,8 @@ class EventCard extends StatelessWidget {
             if (image.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset('assets/box.jpg',
-                  
+                child: Image.asset(
+                  'assets/box.jpg',
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -97,20 +98,34 @@ class EventCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 5,),
-            Divider( height: 2, thickness: 3,color: Colors.deepPurple,),
-           SizedBox(height: 8,)
-            ,Row(
+            SizedBox(
+              height: 5,
+            ),
+            Divider(
+              height: 2,
+              thickness: 3,
+              color: Colors.deepPurple,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
- 
-                Icon(Icons.favorite,color: Colors.red,),
-                SizedBox(width: 5,),
+                IconButton(
+                    onPressed: addtocart,
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )),
+                SizedBox(
+                  width: 5,
+                ),
                 Icon(Icons.save_alt_sharp),
-                  SizedBox(width: 30,),
+                SizedBox(
+                  width: 30,
+                ),
                 Icon(Icons.comment)
-          
-
               ],
             )
           ],

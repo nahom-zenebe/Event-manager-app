@@ -16,6 +16,7 @@ class EventDataSource {
     final response = await http.post(
       Uri.parse("$baseApi/createevent"),
       body: jsonEncode({
+        
         'title': title,
         'location': location,
         'category': category,

@@ -2,6 +2,7 @@ import '../../domain/entities/event.dart';
 
 class EventModel extends Event {
   EventModel({
+    required String id,
     required String title,
     required String location,
     required String category,
@@ -10,6 +11,7 @@ class EventModel extends Event {
     required DateTime startDate,
     required DateTime endDate,
   }) : super(
+             id :id,
           title: title,
           location: location,
           category: category,
@@ -21,6 +23,7 @@ class EventModel extends Event {
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
+      id:json["id"] ?? "",
       title: json["title"] ?? "",
       location: json["location"] ?? "",
       category: json["category"] ?? "",
