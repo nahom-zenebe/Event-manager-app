@@ -4,7 +4,7 @@ import 'package:myapp/features/auth/presentation/UI/signuppage.dart';
 import '../bloc/auth/auth_event.dart';
 import '../bloc/auth/auth_state.dart';
 import '../bloc/auth/auth_bloc.dart';
-import 'homepage.dart';
+import '../../../../features/Event/presentation/pages/home_display.dart';
 
 class LoginPage extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
@@ -105,7 +105,7 @@ class LoginPage extends StatelessWidget {
                           email: emailController.text,
                           password: passwordController.text));
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Homepage()));
+                          MaterialPageRoute(builder: (context) => HomeDisplay()));
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(430, 50),

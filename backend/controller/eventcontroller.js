@@ -3,14 +3,14 @@ const Event = require('../model/Event');
 
 module.exports.createEvent = async (req, res) => {
   try {
-    const { title, location, Category, image, orgnaizer, Startdate, Enddate } = req.body;
+    const { title, location, image, orgnaizer, Startdate, Enddate } = req.body;
 
    
-    if (!title || !location || !Category || !orgnaizer || !Startdate || !Enddate) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
+  
 
-    const event = new Event(req.body);
+    const event = new Event({
+      title, location,  orgnaizer, Startdate, Enddate
+    });
     await event.save();
     res.status(201).json({
       message: 'Event created successfully',

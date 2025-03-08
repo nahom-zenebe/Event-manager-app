@@ -4,8 +4,8 @@ class Event {
   final String category; 
   final String image;
   final String organizer;
-  final String startDate; 
-  final String endDate; 
+  final DateTime startDate; 
+  final DateTime endDate; 
 
   Event({
     required this.title,

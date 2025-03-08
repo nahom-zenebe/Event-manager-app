@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/event_bloc.dart';
 import '../bloc/event_state.dart';
 import '../../../../core/widgets/Events.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -12,27 +13,52 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   @override
+  void initState() {
+    super.initState();
+    context.read<EventBloc>().add(GetAllEvents());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Event manager"),
-        centerTitle: true,
-      ),
+     
       body: BlocConsumer<EventBloc, EventState>(
-
-      listener: (context, state) {
-          if (state is EventFailure ) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+        listener: (context, state) {
+          if (state is EventFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
           }
         },
-
-        builder:(context,state){
-
-
-
-        }),
-
+        builder: (context, state) {
+          if (state is EventLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is EventLoaded) {
+            final events = state.events;
+            return ListView.builder(
+              itemCount: events.length,
+              itemBuilder: (context, index) {
+                final event = events[index];
+                return EventCard(
+                  title: event.title,
+                  location: event.location,
+                  category: event.category,
+                  image: event.image,
+                  organizer: event.organizer,
+                  startDate: event.startDate,
+                  endDate: event.endDate,
+                );
+              },
+            );
+          } else if (state is EventFailure) {
+            return Center(
+              child: Text('Error: ${state.message}'),
+            );
+          } else {
+            return const Center(child: Text('No events available.'));
+          }
+        },
+      ),
     );
   }
 }

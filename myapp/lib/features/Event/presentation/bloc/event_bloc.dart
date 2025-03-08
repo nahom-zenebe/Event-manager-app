@@ -35,6 +35,8 @@ class EventBloc extends Bloc<EventEvent, EventState> {
       CreateEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
+  
+
       final newEvent = await createEvent.createEvent(Event(
         title: event.title,
         location: event.location,
@@ -62,7 +64,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     }
   }
 
-  // 📌 Handle Update Event
+  
   Future<void> _onUpdateEvent(
       UpdateEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());

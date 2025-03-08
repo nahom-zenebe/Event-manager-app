@@ -17,6 +17,8 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true  
 }));
+//67cb5d6806d0b3f33cc3ea4d-org
+//cate
 
 app.use('/api/auth', authRoutes);
 app.use('/api/event',eventrouter)
@@ -30,5 +32,5 @@ mongoose.connect(process.env.MongoDBUrL, {
 .catch((err) => console.log('Database connection error:', err));
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

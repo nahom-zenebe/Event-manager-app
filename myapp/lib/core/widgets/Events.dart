@@ -6,8 +6,8 @@ class EventCard extends StatelessWidget {
   final String category;
   final String image;
   final String organizer;
-  final String startDate;
-  final String endDate;
+  final DateTime startDate;
+  final DateTime endDate;
 
   const EventCard({
     required this.title,
@@ -33,8 +33,8 @@ class EventCard extends StatelessWidget {
             if (image.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  image,
+                child: Image.asset('assets/box.jpg',
+                  
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -97,6 +97,22 @@ class EventCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
+            SizedBox(height: 5,),
+            Divider( height: 2, thickness: 3,color: Colors.deepPurple,),
+           SizedBox(height: 8,)
+            ,Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+ 
+                Icon(Icons.favorite,color: Colors.red,),
+                SizedBox(width: 5,),
+                Icon(Icons.save_alt_sharp),
+                  SizedBox(width: 30,),
+                Icon(Icons.comment)
+          
+
+              ],
+            )
           ],
         ),
       ),

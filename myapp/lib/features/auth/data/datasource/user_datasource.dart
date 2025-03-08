@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../model/usermodel.dart';
 
 class UserDatasource {
-  final String BaseUrl = "http://localhost:5000/api/auth";
+  final String BaseUrl = "http://localhost:5002/api/auth";
 
   Future<Usermodel> signup(
       String name, String email, String password, String role) async {

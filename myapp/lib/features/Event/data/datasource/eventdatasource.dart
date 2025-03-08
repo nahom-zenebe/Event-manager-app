@@ -1,12 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/eventmodel.dart';
+import 'package:intl/intl.dart';
 
 class EventDataSource {
-  final String baseApi = "http://localhost:5000/api/event";
+  final String baseApi = "http://localhost:5002/api/event";
 
   Future<EventModel> createEvent(String title, String location, String category,
-      String image, String organizer, String startDate, String endDate) async {
+      String image, String organizer, DateTime startDate, DateTime endDate) async {
+
+         String formattedStartDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(startDate);
+  String formattedEndDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(endDate);
+
+
     final response = await http.post(
       Uri.parse("$baseApi/createevent"),
       body: jsonEncode({
@@ -15,8 +21,8 @@ class EventDataSource {
         'category': category,
         'image': image,
         'organizer': organizer,
-        'startDate': startDate,
-        'endDate': endDate
+        'startDate': formattedStartDate,
+        'endDate': formattedEndDate
       }),
       headers: {'Content-Type': 'application/json'},
     );
@@ -42,7 +48,13 @@ class EventDataSource {
   }
 
   Future<EventModel> updateEvent(String id, String title, String location, String category,
-      String image, String organizer, String startDate, String endDate) async {
+      String image, String organizer,DateTime startDate, DateTime endDate) async {
+
+  String formattedStartDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(startDate);
+  String formattedEndDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(endDate);
+
+
+
     final response = await http.put(
       Uri.parse("$baseApi/updateevent/$id"),
       body: jsonEncode({
@@ -51,8 +63,8 @@ class EventDataSource {
         'category': category,
         'image': image,
         'organizer': organizer,
-        'startDate': startDate,
-        'endDate': endDate
+        'startDate': formattedStartDate,
+        'endDate': formattedEndDate 
       }),
       headers: {'Content-Type': 'application/json'},
     );
@@ -65,7 +77,7 @@ class EventDataSource {
   }
 
   Future<List<EventModel>> getAllEvents() async {
-    final response = await http.get(Uri.parse("$baseApi/getallevents"));
+    final response = await http.get(Uri.parse("$baseApi/event/getallevents"));
 
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);

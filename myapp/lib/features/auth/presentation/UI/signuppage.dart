@@ -4,7 +4,7 @@ import 'package:myapp/features/auth/presentation/UI/loginpage.dart';
 import 'package:myapp/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:myapp/features/auth/presentation/bloc/auth/auth_event.dart';
 import 'package:myapp/features/auth/presentation/bloc/auth/auth_state.dart';
-import 'homepage.dart';
+import '../../../../features/Event/presentation/pages/home_display.dart';
 
 class Signuppage extends StatefulWidget {
   const Signuppage({super.key});
@@ -157,7 +157,7 @@ class _SignuppageState extends State<Signuppage> {
                           password: passwordController.text,
                           role: roleController.text));
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Homepage()));
+                          MaterialPageRoute(builder: (context) => HomeDisplay()));
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(430, 50),

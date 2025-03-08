@@ -5,7 +5,7 @@ class SignupUsecase {
 
   SignupUsecase(this.repository);
 
-  // The `call` method allows the usecase to be invoked like a function
+  
   Future<User> signup(String name, String email, String password, String role) {
     return repository.signup(name, email, password, role);
   }
