@@ -11,7 +11,7 @@ import './event_state.dart';
 part 'event_event.dart';
 
 class EventBloc extends Bloc<EventEvent, EventState> {
-  final List<Event> cart = [];
+
   final Createeventusecase createEvent;
   final Deleteeventusecase deleteEvent;
   final Updateeventusecase updateEvent;
@@ -52,7 +52,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     }
   }
 
-  Future<void> _onDeleteEvent(
+  Future <void> _onDeleteEvent(
       DeleteEvent event, Emitter<EventState> emit) async {
     emit(EventLoading());
     try {
@@ -114,20 +114,25 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     }
   }
 
-  Future<void> _onAddToCart(
-      Addtocart event, Emitter<EventState> emit) async {
-    final updatedCart = List<Event>.from(cart)..add(event.event);
-    cart.clear();
-    cart.addAll(updatedCart);
-    emit(CartUpdated(updatedCart));
+ void _onAddToCart(Addtocart event, Emitter<EventState> emit) {
+  if (state is EventLoaded) {
+    final currentState = state as EventLoaded;
+    final updatedCart = List<Event>.from(currentState.cart)..add(event.event);
+    
+    emit(EventLoaded(events: currentState.events, cart: updatedCart));
   }
+}
 
-  Future<void> _onRemoveFromCart(
-      Removefromcart event, Emitter<EventState> emit) async {
-    final updatedCart = List<Event>.from(cart)..removeWhere((e) => e.id == event.Eventid);
-    cart.clear();
-    cart.addAll(updatedCart);
-    emit(CartUpdated(updatedCart));
+
+  void _onRemoveFromCart(Removefromcart event, Emitter<EventState> emit) {
+  if (state is EventLoaded) {
+    final currentState = state as EventLoaded;
+    final updatedCart = List<Event>.from(currentState.cart)
+      ..removeWhere((e) => e.id == event.Eventid);
+
+    emit(EventLoaded(events: currentState.events, cart: updatedCart));
   }
+}
+
 
 }

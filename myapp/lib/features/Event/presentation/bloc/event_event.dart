@@ -27,7 +27,7 @@ class CreateEvent extends EventEvent {
       [title, location, category, image, organizer, startDate, endDate];
 }
 
-// 📌 Delete Event
+
 class DeleteEvent extends EventEvent {
   final String id;
 

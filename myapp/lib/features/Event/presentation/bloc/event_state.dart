@@ -35,8 +35,12 @@ class EventUpdated extends EventState {
 }
 
 class EventLoaded extends EventState {
+  final List<Event> cart;
   final List<Event> events;
-  EventLoaded({required this.events});
+  EventLoaded({required this.events,this.cart = const []});
+  
+   @override
+  List<Object> get props => [events, cart]; 
 }
 
 class CartUpdated extends EventState {
